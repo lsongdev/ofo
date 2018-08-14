@@ -1,0 +1,11 @@
+extends layout.jade
+
+block content
+  h1.hero 人人为我, 我为人人
+  if success
+    p.info 感谢提交, 你将帮助更多人 ^_^
+  else
+    form.form(method='post')
+      input.input.input-block(name='number', type='number', pattern='[0-9]*', maxlength='8', placeholder='请输入车牌号', value="#{query}" required)
+      input.input.input-block(name='password', type='number', pattern='[0-9]*', maxlength='8', placeholder='请输入密码', required)
+      button.btn.btn-block 立即提交

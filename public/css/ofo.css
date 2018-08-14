@@ -1,0 +1,147 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font-size: 14px;
+  background-color: #ffdb00;
+}
+.title{
+  color: white;
+  font-size: 10rem;
+  text-align: center;
+  font-family: Conv_Bauhausl,sans-serif;
+}
+.title a{
+  font-family: sans-serif;
+  font-weight: lighter;
+  text-decoration: none;
+}
+.hero{
+  color: white;
+  font-size: 5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.info{
+  width: 50%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  background: white;
+}
+.info a{
+  color: #ffdb00;
+}
+.form{
+  width: 50%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  text-align: center;
+  background-color: white;
+}
+.input{
+  outline: 0;
+  padding: 1rem;
+  font-size: 2rem;
+  font-family: monospace;
+  text-align: center;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+.input-block{
+  width: 100%;
+  display: block;
+}
+.btn{
+  color: white;
+  padding: 1rem;
+  font-size: 2rem;
+  border: 1px solid #ccc;
+  background: #ffdb00;
+}
+.btn-block{
+  width: 100%;
+  display: block;
+}
+footer{
+  display: block;
+  margin: 2rem auto;
+}
+nav{
+  text-align: center;
+  display: block;
+}
+nav a{
+  margin-right: .5rem;
+}
+a{
+  color: white;
+}
+.input-group{
+  position: relative;
+}
+
+input[type=file]{
+  top: 30%;
+  right: 3%;
+  outline: 0;
+  width: 30px;
+  height: 20px;
+  z-index: 999;
+  overflow: hidden;
+  position: absolute;
+  border: 1px solid #ccc;
+  color: transparent;
+}
+input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+input[type=file]:before{
+  content: '';
+  -webkit-user-select: none;
+}
+input[type=file]:after{
+  top: 24%;
+  color: #999;
+  width: 100%;
+  height: 5px;
+  font-size: 8px;
+  content: '123456';
+  position: absolute;
+  border-bottom: 1px dashed red;
+}
+
+
+
+@media screen and (max-width: 768px){
+  header{
+    margin-top: 2rem;
+  }
+  main{
+    width: 95%;
+  }
+  .hero{
+    font-size: 2rem;
+  }
+  .info, .form{
+    width: 90%;
+    font-size: 1rem;
+    border-radius: 3px;
+  }
+  .input, .btn{ 
+    padding: .5rem;
+    display: block;
+    font-size: 1.5rem;
+  }
+  input::-webkit-input-placeholder{
+    font-size: 1rem;
+  }
+}

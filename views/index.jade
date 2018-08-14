@@ -1,0 +1,18 @@
+extends layout.jade
+
+block content
+  h1.hero 随时随地免费骑
+  if query
+    if password
+      .info [#{query}] 的密码是 #{password},
+        p 祝您使用愉快 ^_^
+    else
+      p.info
+        | 抱歉, 我们不知道 #{query} 对应的密码, 如果您知道请
+        a(href='/submit?q=#{query}') 告诉我们
+        | 。
+  else
+    form.form
+      .input-group
+        input.input.input-block(name='q', value=query type='text', pattern='[0-9]*', maxlength='8', placeholder='请输入车牌号', required)
+      button.btn.btn-block 立即用车
