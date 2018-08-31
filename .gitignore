@@ -1,5 +1,6 @@
 
 *.log
 *.db
+yarn.lock
 
 node_modules/

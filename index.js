@@ -1,50 +1,69 @@
-const http = require('http');
-const https = require('https');
-const qs = require('querystring');
-
-const fetch = (path, data) => new Promise((resolve, reject) => {
-  const req = https.request({
-    method: 'post',
-    hostname: 'one.ofo.com',
-    path,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  }, res => {
-    let buffer = '';
-    res
-      .on('error', reject)
-      .on('data', chunk => buffer += chunk)
-      .on('end', () => {
-        const { errorCode, msg, values } = JSON.parse(buffer);
-        if(errorCode === 200){
-          resolve(values)
-        }else{
-          const error = new Error(msg);
-          error.code = errorCode;
-          error.values = values;
-          reject(error);
-        }
-      });
-  });
-  req.write(qs.stringify(data));
-  req.end();
-});
+const xttp = require('xttp');
 
 const ofo =  {
-  code(tel, { lat, lng, ccc = '86' } = {}){
-    return fetch('/verifyCode_v2', { tel, type: 1, lat, lng, ccc });
+  lat: '',
+  lng: '',
+  source: 2,
+  post(url, body){
+    return xttp(url, {
+      method: 'post',
+      body
+    })
+    .then(res => res.json());
   },
-  login(tel, code, { lat, lng, ccc = '86' } = {}){
-    return fetch('/api/login_v2', { tel, code, ccc, lat, lng });
+  set(name, value){
+    this[name] = value;
+    return this;
   },
-  near(token, { lat, lng, source = 2 } = {}){
-    return fetch('/nearbyofoCar', { lat, lng, token, source });
+  location(lat, lng){
+    return Object.assign(this, { lat, lng });
+  },
+  code(tel, ccc = '86'){
+    const { lat, lng } = this;
+    return this.post('http://one.ofo.com/verifyCode_v2', { 
+      ccc, tel, type: 1, lat, lng
+    });
+  },
+  login(tel, code, ccc = '86'){
+    const { lat, lng } = this;
+    return this.post('http://one.ofo.com/api/login_v2', { 
+      tel, code, ccc, lat, lng 
+    });
+  },
+  user(){
+    const { lat, lng, source, token } = this;
+    return this.post('http://san.ofo.so/ofo/Api/v4/info/user', {
+      token, source, lat, lng
+    });
+  },
+  near(){
+    const { lat, lng, source, token } = this;
+    return this.post('http://one.ofo.com/nearbyofoCar', { 
+      token, source, lat, lng
+    });
+  },
+  start(carno){
+    const { lat, lng, token, source } = this;
+    return this.post('https://san.ofo.so/ofo/Api/v2/carno', {
+      carno, lat, lng, token, source
+    });
+  },
+  end(orderno){
+    const { lat, lng, token, source } = this;
+    return this.post('https://san.ofo.so/ofo/Api/v2/end', {
+      orderno, token, source, lat, lng
+    });
+  },
+  pay(orderno){
+    const { lat, lng, token, source } = this;
+    return this.post('https://san.ofo.so/ofo/Api/v2/pay', {
+      orderno, token, source, lat, lng
+    });
   }
 }
 
-ofo.Server = require('./server');
 ofo.createServer = () => {
+  ofo.Server = require('./server');
   return new http.Server(ofo.Server);
 };
 

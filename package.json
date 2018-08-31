@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node index.js"
   },
-  "repository": "git@github.com:song940/ofo.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/song940/ofo.git"
+  },
   "author": "Lsong <song940@gmail.com>",
   "license": "MIT",
   "description": "free bike for everyone",
@@ -19,6 +22,19 @@
     "kelp-route": "*",
     "kelp-send": "*",
     "kelp-static": "*",
-    "level": "*"
-  }
+    "level": "*",
+    "xttp": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/song940/ofo/issues"
+  },
+  "homepage": "https://github.com/song940/ofo#readme",
+  "directories": {
+    "doc": "docs",
+    "example": "example"
+  },
+  "keywords": [
+    "ofo",
+    "bike"
+  ]
 }

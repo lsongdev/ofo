@@ -8,22 +8,12 @@ const waitForInput = prompt => new Promise((resolve, reject) => {
 });
 
 (async () => {
-  
-  const location = { lat: 48.85, lng: 2.37 };
 
-  let token = await waitForInput('Do you have user token ? ');
-  if(!token){
-    const ccc = await waitForInput('What\'s your country code ? ');
-    const mobile = await waitForInput('What\'s your mobile phone number ? ');
-    const result = await ofo.code(mobile, { ccc });
-    console.log('sms code sent:', result);
-    
-    const code = await waitForInput('please input OTP code:> ');
-    ({ token } = await ofo.login(mobile, code, location));
-    console.log('user token:', token);
-  }
-
-  const bikes = await ofo.near(token, location);
-  console.log('near bikes', bikes);
+  ofo.location(48.85, 2.37);
+  ofo.token = 'afe2a210-c150-11e8-9219-a9f7cfa3d708';
+  const res = await ofo.near();
+  console.log(res);
+  // const res = await ofo.start('n81ZWY');
+  // console.log(res);
 
 })();
