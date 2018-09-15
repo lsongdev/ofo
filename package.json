@@ -19,6 +19,7 @@
     "kelp-route": "*",
     "kelp-send": "*",
     "kelp-static": "*",
-    "level": "*"
+    "level": "*",
+    "xttp": "^0.0.2"
   }
 }
