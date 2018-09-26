@@ -3,12 +3,13 @@ const xttp = require('xttp');
 const ofo =  {
   lat: '',
   lng: '',
-  source: 0,
+  source: 2,
   post(url, body){
     return xttp(url, {
       method: 'post',
       body
-    }).then(res => res.json());
+    })
+    .then(res => res.json());
   },
   set(name, value){
     this[name] = value;
@@ -27,6 +28,12 @@ const ofo =  {
     const { lat, lng } = this;
     return this.post('http://one.ofo.com/api/login_v2', { 
       tel, code, ccc, lat, lng 
+    });
+  },
+  user(){
+    const { lat, lng, source, token } = this;
+    return this.post('http://san.ofo.so/ofo/Api/v4/info/user', {
+      token, source, lat, lng
     });
   },
   near(){
